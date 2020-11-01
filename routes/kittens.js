@@ -18,7 +18,7 @@ router.get('/', async function (req, res, next) {
       if (err) return console.error(err);
       console.log(kittens);
     });
-    res.send('<h1>Home page for Kittens Reached</h1>');
+    res.send('<h1>Home page for World Animals API Reached</h1>');
   } catch (err) {
     console.error(err.message);
   }
