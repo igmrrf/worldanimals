@@ -16,8 +16,9 @@ mongoose.set('useFindAndModify', false);
 // Encoding domain sockets if use as connection string.
 // const host = encodeURIComponent('/tmp/mongodb-27017.sock');
 
-const monogdbConnectString = 'mongodb://localhost:27017/test';
+const monogdbConnectString = process.env.MONGO_DATABASE_URL;
 console.log(encodeMongoURI(monogdbConnectString), 'Url');
+
 mongoose.connect(encodeMongoURI(monogdbConnectString));
 
 const db = mongoose.connection;
