@@ -1,0 +1,7 @@
+{
+  "port": "PORT",
+  "password": "PASSWORD",
+  "username": "USERNAME",
+  "url": "DATABASE",
+  "jwt_secret_key": "JWT_SCECRET_KEY"
+}

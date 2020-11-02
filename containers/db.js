@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const uriFormat = require('mongodb-uri');
+const config = require('config');
 
 // To encode Mongo Connection Strings as passwords may contain non-allowed characters.
 function encodeMongoURI(uriString) {
