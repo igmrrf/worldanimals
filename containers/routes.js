@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const Kittens = require('../routes/kittens');
 
 module.exports = (app) => {
-  app.use(expressStatusMonitor(require('../config/network.config')));
+  app.use(expressStatusMonitor(require('../config/status')));
   app.use(
     cors({
       methods: ['GET', 'POST'],

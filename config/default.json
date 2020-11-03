@@ -1,4 +1,7 @@
 {
+  "port": 5984,
+  "dbName": "worldanimals",
+  "dbConfig": "",
   "Customer": {
     "dbConfig": {
       "host": "localhost",

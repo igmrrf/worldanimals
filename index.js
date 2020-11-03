@@ -7,10 +7,14 @@ const app = express();
 
 const environment = (process.env.NODE_ENV = 'development');
 console.log(config.has('port'));
+console.log(config.get('port'));
+console.log('NODE_CONFIG_DIR: ' + config.util.getEnv('NODE_CONFIG_DIR'));
+console.log('NODE_CONFIG: ' + config.util.getEnv('NODE_CONFIG'));
 
 console.log(environment);
 
-require('./containers/db');
+require('./containers/database');
+
 require('./containers/routes')(app);
 
 const PORT = process.env.PORT || 8000;
@@ -18,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
 
 if (process.env.NODE_ENV === 'production') {
   https
-    .createServer(require('./config/ssl.config'), app)
+    .createServer(require('./config/ssl'), app)
     .listen(PORT, function (error) {
       if (error) return console.error(error.message);
       console.log(`Server running on port ${PORT}`);

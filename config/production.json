@@ -1,4 +1,5 @@
 {
+  "host": "prod-db-server",
   "Customer": {
     "dbConfig": {
       "host": "prod-db-server"

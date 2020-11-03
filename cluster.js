@@ -29,7 +29,6 @@ if (cluster.isMaster) {
   });
   cluster.on('listening', function (worker) {
     console.log('Cluster %d connected', worker.process.pid);
-    console.log(worker);
   });
 
   cluster.on('disconnect', function (worker) {
