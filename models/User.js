@@ -5,41 +5,80 @@ const config = require('config');
 const joi = require('joi');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-    index: true,
+const userSchema = new mongoose.Schema(
+  {
+    full_name: {
+      first_name: {
+        type: String,
+        required: true,
+        index: true,
+      },
+      last_name: {
+        type: String,
+        required: true,
+        index: true,
+      },
+      alias: name,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    mobile: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    plan: {
+      type: String,
+      default: 'free',
+      lowercase: true,
+    },
+    age: {
+      type: Number,
+      required: true,
+      min: 18,
+      max: 200,
+    },
+    serial_number: {
+      type: Number,
+      unique: true,
+    },
+    is_verified: {
+      type: Boolean,
+      default: false,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  mobile: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  plan: {
-    type: String,
-    default: 'free',
-    lowercase: true,
-  },
-  serial_number: {
-    type: Number,
-    unique: true,
-  },
-  is_verified: {
-    type: Boolean,
-    default: false,
-  },
-});
+  {
+    collection: 'user',
+    minimize: false,
+    timestamps: {
+      currentTime: () => Math.floor(Date.now() / 1000),
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+    },
+  }
+);
+
+userSchema.query.byPlan = function (plan) {
+  return this.where({ plan: new RegExp(plan, i) });
+};
+
+userSchema
+  .virtual('full_name')
+  .get(function () {
+    return this.name.first_name + ' ' + this.name.last_name;
+  })
+  .set(function (name) {
+    this.name.first_name = name.substr(0, name.indexOf(' '));
+    this.name.last_name = name.substr(name.indexOf(' ') + 1);
+  });
+
 userSchema.methods.generateAuth = function () {
   return jwt.sign(
     {

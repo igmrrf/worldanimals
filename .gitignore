@@ -4,3 +4,7 @@ yarn.lock
 .env.production
 .env.development
 
+.vscode
+.idea
+*.cert
+*.key
