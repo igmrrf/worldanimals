@@ -1,0 +1,4 @@
+{"message":"Successful Connection to server on port 3333","level":"info","service":"user-service"}
+{"message":"There has been an error connecting to the database","level":"error","service":"user-service"}
+{"message":"There has been an error connecting to the database","level":"error","service":"user-service"}
+{"service":"user-service","message":"Unhandled Rejection:  URI does not have hostname, domain name and tld","level":"info"}

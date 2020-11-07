@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.use(expressStatusMonitor(require('../config/status')));
   app.use(
     cors({
-      methods: ['GET', 'POST'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       allowedHeaders: ['Content-Type', 'Authorization', 'auth-token'],
     })
   );

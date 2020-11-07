@@ -4,16 +4,13 @@ const morgan = require('morgan');
 const https = require('https');
 const config = require('config');
 const app = express();
+const logger = require('./containers/logger');
 
-const environment = (process.env.NODE_ENV = 'development');
-console.log(config.has('port'));
-console.log(config.get('port'));
-console.log('NODE_CONFIG_DIR: ' + config.util.getEnv('NODE_CONFIG_DIR'));
-console.log('NODE_CONFIG: ' + config.util.getEnv('NODE_CONFIG'));
+process.on('unhandledRejection', (error) => {
+  logger.info('Unhandled Rejection: ', { message: error.message });
+});
 
-console.log(environment);
-
-require('./containers/database');
+require('./containers/database')(logger);
 
 require('./containers/routes')(app);
 
